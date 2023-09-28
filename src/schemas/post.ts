@@ -39,6 +39,12 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'subject',
+      title: 'Subjects',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'skosConcept' }] }],
+    }),
   ],
   preview: {
     select: {

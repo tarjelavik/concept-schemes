@@ -69,6 +69,9 @@ export default function ProjectSlugRoute(
           <h1 className="post__title">{post.title}</h1>
           <p className="post__excerpt">{post.excerpt}</p>
           <p className="post__date">{formatDate(post._createdAt)}</p>
+          <ul>{post.subject?.map(concept => (
+            <li key={concept?._id}>{concept?.prefLabel}</li>
+          ))}</ul>
           <div className="post__content">
             <PortableText value={post.body} />
           </div>

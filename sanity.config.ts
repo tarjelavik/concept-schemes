@@ -11,6 +11,7 @@ import {
   IframeOptions,
 } from 'sanity-plugin-iframe-pane'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
+import { taxonomyManager } from 'sanity-plugin-taxonomy-manager'
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
@@ -53,6 +54,18 @@ export default defineConfig({
           S.view.component(Iframe).options(iframeOptions).title('Preview'),
         ])
       },
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            ...S.documentTypeListItems().filter(
+              (listItem) => !['skosConcept', 'skosConceptScheme'].includes(listItem.getId())
+            ),
+          ]),
+    }),
+    taxonomyManager({
+      // Optional: Set a Base URI to use for new concepts & concept schemes
+      baseUri: 'https://data.ub.uib.no/',
     }),
     // Add the "Open preview" action
     previewUrl({
